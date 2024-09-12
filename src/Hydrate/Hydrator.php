@@ -62,14 +62,14 @@ final class Hydrator
                 foreach ($properties as $propertyName) {
                     $getter = 'get' . $propertyName;
                     if (method_exists($this, $getter)) {
-                        $value = $this->$getter($properties);
+                        $value[$propertyName] = $this->$getter($properties);
                     } elseif (property_exists($this, $propertyName)) {
-                        $value = $this->$propertyName;
+                        $value[$propertyName] = $this->$propertyName;
                     } elseif (
                         property_exists($this, '__extraProperties')
                         && array_key_exists($propertyName, $this->__extraProperties)
                     ) {
-                        return $this->__extraProperties[$propertyName];
+                        $value[$propertyName] =  $this->__extraProperties[$propertyName];
                     } else {
                         throw new GetPropertyException($this, $propertyName);
                     }
