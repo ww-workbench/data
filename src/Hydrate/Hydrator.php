@@ -64,7 +64,7 @@ final class Hydrator
                     if (method_exists($this, $getter)) {
                         $value = $this->$getter($properties);
                     } elseif (property_exists($this, $propertyName)) {
-                        $value = $this->$properties;
+                        $value = $this->$propertyName;
                     } elseif (
                         property_exists($this, '__extraProperties')
                         && array_key_exists($propertyName, $this->__extraProperties)
